@@ -19,17 +19,20 @@ from rest_framework.routers import DefaultRouter
 from . import views
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+import os
 
 router = views.router
 
 @api_view(['GET'])
 def api_root(request, format=None):
+    codespace_name = os.environ.get('CODESPACE_NAME', '')
+    base_url = f"https://{codespace_name}-8000.app.github.dev/"
     return Response({
-        'users': request.build_absolute_uri('api/users/'),
-        'teams': request.build_absolute_uri('api/teams/'),
-        'activities': request.build_absolute_uri('api/activities/'),
-        'leaderboard': request.build_absolute_uri('api/leaderboard/'),
-        'workouts': request.build_absolute_uri('api/workouts/'),
+        'users': base_url + 'api/users/',
+        'teams': base_url + 'api/teams/',
+        'activities': base_url + 'api/activities/',
+        'leaderboard': base_url + 'api/leaderboard/',
+        'workouts': base_url + 'api/workouts/',
     })
 
 urlpatterns = [
