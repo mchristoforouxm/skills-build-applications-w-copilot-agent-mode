@@ -1,3 +1,6 @@
+import os
+
+
 """
 Django settings for octofit_tracker project.
 
@@ -27,6 +30,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+ALLOWED_HOSTS = [
+    os.environ.get('CODESPACE_NAME', '') + '-8000.app.github.dev',
+    'localhost',
+    '127.0.0.1',
+]
 
 # Application definition
 
@@ -93,6 +101,10 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = ['*']
 CORS_ALLOW_METHODS = ['*']
+
+CORS_ALLOWED_ORIGINS = [
+    f"https://{os.environ.get('CODESPACE_NAME', '')}-8000.app.github.dev",
+]
 
 
 

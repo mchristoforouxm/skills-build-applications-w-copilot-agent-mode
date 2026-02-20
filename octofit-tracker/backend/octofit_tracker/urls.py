@@ -36,4 +36,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('', api_root, name='api-root'),
+    path('api/', include(('octofit_tracker.api_urls', 'api'), namespace='api')),
 ]
